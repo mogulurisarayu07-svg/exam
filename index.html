@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarayu | Portfolio</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-soft: #111827;
+            --card: #1f2937;
+            --primary: #38bdf8;
+            --accent: #34d399;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --light: #f8fafc;
+            --shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #111827 50%, #0b1220 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            margin-bottom: 22px;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 72px;
+        }
+
+        .logo {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #2563eb);
+            color: var(--light);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border-color: rgba(255, 255, 255, 0.18);
+            color: var(--light);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .hero {
+            padding: 90px 0 60px;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 6vw, 4.6rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+            color: var(--light);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text .role {
+            display: inline-block;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 1.07rem;
+            max-width: 620px;
+            margin-bottom: 28px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 120px;
+            padding: 12px 18px;
+            border-radius: 14px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 28px;
+            padding: 22px;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-photo {
+            height: 440px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(56,189,248,0.25), rgba(52,211,153,0.2));
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 120px;
+            font-weight: 700;
+        }
+
+        .mini-card {
+            position: absolute;
+            right: -18px;
+            bottom: 24px;
+            background: #111827;
+            border: 1px solid rgba(148,163,184,0.15);
+            padding: 14px 18px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .mini-card strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--light);
+        }
+
+        .mini-card span {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-card p {
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .about-list {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .about-list li {
+            color: var(--text);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-list li::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(52,211,153,0.15);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: rgba(17, 24, 39, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 22px;
+            padding: 26px 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(56, 189, 248, 0.45);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 18px;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tags span {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--primary);
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: rgba(17, 24, 39, 0.78);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(56,189,248,0.25), rgba(52,211,153,0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .project-body {
+            padding: 22px 20px 26px;
+        }
+
+        .project-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .project-body p {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .project-tags span {
+            background: rgba(52,211,153,0.08);
+            border: 1px solid rgba(52,211,153,0.15);
+            color: var(--accent);
+            font-size: 0.8rem;
+            padding: 7px 9px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .project-links a {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .edu-card, .exp-card {
+            background: rgba(17, 24, 39, 0.78);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .edu-card h3, .exp-card h3 {
+            color: var(--light);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .edu-card .date, .exp-card .date {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .edu-card p, .exp-card p {
+            color: var(--muted);
+        }
+
+        .contact-wrap {
+            background: rgba(17, 24, 39, 0.77);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 24px;
+            padding: 34px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 14px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+        }
+
+        .contact-item strong {
+            color: var(--light);
+        }
+
+        .socials {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .socials a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        footer {
+            padding: 25px 0 50px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner,
+            .about-grid,
+            .contact-wrap,
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo"><span>S</span>arayu</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Hire Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-inner">
+                <div class="hero-text">
+                    <div class="role">Frontend Developer / Fresher</div>
+                    <h1>Hello, I'm <span>Sarayu</span></h1>
+                    <p>
+                        I am a passionate and motivated fresher focused on building responsive,
+                        modern, and user-friendly web interfaces. I enjoy turning ideas into
+                        clean, functional digital experiences using HTML, CSS, JavaScript, and
+                        design principles that make websites feel professional and engaging.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                    </div>
+
+                    <div class="hero-meta">
+                        <span class="badge">Web Design</span>
+                        <span class="badge">Frontend</span>
+                        <span class="badge">Responsive UI</span>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-photo">S</div>
+                    <div class="mini-card">
+                        <strong>1+</strong>
+                        <span>Years Learning</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">
+                    A fresher with a strong interest in front-end development and a desire to
+                    learn, grow, and contribute to real-world web projects.
+                </p>
+
+                <div class="about-grid">
+                    <div class="about-card">
+                        <p>
+                            I am a graduate with a passion for creating visually appealing and
+                            user-friendly websites. I enjoy learning modern web technologies and
+                            building projects that are both functional and polished.
+                        </p>
+                        <p>
+                            My focus is on responsive design, clean coding practices, and
+                            delivering a smooth user experience across devices. I am eager to
+                            work in a professional environment where I can strengthen my skills
+                            and contribute to meaningful projects.
+                        </p>
+                    </div>
+
+                    <div class="about-card">
+                        <ul class="about-list">
+                            <li>Creative and detail-oriented</li>
+                            <li>Quick learner and adaptable</li>
+                            <li>Comfortable with HTML, CSS, JavaScript</li>
+                            <li>Interested in UI/UX and front-end development</li>
+                            <li>Ready to work in a team environment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <p class="section-subtitle">
+                    These are the key technologies and abilities I have developed while
+                    learning and building projects.
+                </p>
+
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>Frontend</h3>
+                        <div class="skill-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Bootstrap</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Backend</h3>
+                        <div class="skill-tags">
+                            <span>Python</span>
+                            <span>SQL</span>
+                            <span>APIs</span>
+                            <span>Database</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Tools</h3>
+                        <div class="skill-tags">
+                            <span>VS Code</span>
+                            <span>Git</span>
+                            <span>GitHub</span>
+                            <span>Chrome DevTools</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">
+                    Some of the web projects I have created to showcase my creativity,
+                    problem-solving, and front-end development skills.
+                </p>
+
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="project-image">01</div>
+                        <div class="project-body">
+                            <h3>Personal Portfolio Website</h3>
+                            <p>
+                                Designed and developed a responsive personal portfolio to present
+                                my profile, skills, and projects in a professional format.
+                            </p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#">Live Demo</a>
+                                <a href="#">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">02</div>
+                        <div class="project-body">
+                            <h3>Landing Page</h3>
+                            <p>
+                                Created a modern business landing page with a clean layout,
+                                call-to-action sections, and mobile-friendly design.
+                            </p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>Responsive</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#">Live Demo</a>
+                                <a href="#">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">03</div>
+                        <div class="project-body">
+                            <h3>To-Do App</h3>
+                            <p>
+                                Built a simple to-do application that allows users to add, complete,
+                                and remove tasks with a clean interactive interface.
+                            </p>
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>DOM</span>
+                                <span>UI</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#">Live Demo</a>
+                                <a href="#">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <p class="section-subtitle">
+                    My academic background and learning path that shaped my interest in
+                    web technologies and design.
+                </p>
+
+                <div class="timeline">
+                    <div class="edu-card">
+                        <h3>Intermediate (MPC)</h3>
+                        <span class="date">Completed</span>
+                        <p>
+                            Completed Intermediate with Mathematics, Physics, and Chemistry (MPC),
+                            which built a strong foundation in analytical thinking and problem-solving.
+                        </p>
+                    </div>
+
+                    <div class="exp-card">
+                        <h3>B.Sc. in Mathematics (Major), Computer Science (Minor)</h3>
+                        <span class="date">Present</span>
+                        <p>
+                            Currently pursuing a Bachelor of Science degree with Mathematics as the
+                            major subject and Computer Science as the minor, focusing on logical
+                            reasoning, technical learning, and software-oriented skills.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">
+                    I am open to internships, entry-level opportunities, and freelance
+                    projects where I can contribute and continue learning.
+                </p>
+
+                <div class="contact-wrap">
+                    <div>
+                        <h3 style="font-size: 2rem; margin-bottom: 14px; color: var(--light);">Let’s Work Together</h3>
+                        <p style="color: var(--muted); margin-bottom: 18px;">
+                            If you are looking for a motivated fresher developer who is eager to
+                            learn and build innovative digital experiences, feel free to reach out.
+                        </p>
+
+                        <div class="contact-info">
+                            <div class="contact-item"><strong>Email:</strong> mogulurisarayu07@gmail.com</div>
+                            <div class="contact-item"><strong>Location:</strong> Vijayawada, Andhra Pradesh</div>
+                        </div>
+
+                        <div class="socials" style="margin-top: 20px;">
+                            <a href="#" aria-label="LinkedIn">in</a>
+                            <a href="#" aria-label="GitHub">gh</a>
+                            <a href="#" aria-label="Instagram">ig</a>
+                        </div>
+                    </div>
+
+                    <div class="about-card">
+                        <p style="font-size: 1.2rem; color: var(--light); font-weight: 700; margin-bottom: 12px;">Quick Message</p>
+                        <p style="color: var(--muted);">
+                            Available for internship, fresher roles, freelance projects, and
+                            front-end development opportunities.
+                        </p>
+                        <a href="mailto:sarayu@email.com" class="btn btn-primary" style="margin-top: 20px;">Send Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            © <span id="year"></span> Sarayu. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
